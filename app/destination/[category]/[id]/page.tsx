@@ -86,7 +86,14 @@ const waterfallData: { [key: string]: any } = {
   },
 }
 
-export default function WaterfallDetailPage({ params }: { params: { id: string } }) {
+type PageProps = {
+  params: {
+    id: string
+    category: string // Add this if you're using [category]/[id] route
+  }
+}
+
+export default function WaterfallDetailPage({ params }: PageProps) {
   const waterfall = waterfallData[params.id]
 
   if (!waterfall) {
