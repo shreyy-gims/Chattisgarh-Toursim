@@ -41,7 +41,7 @@ export default function SignUpPage() {
         <div className="text-center">
           <div className="flex items-center justify-center">
             <MapPin className="h-8 w-8 text-rose-500" />
-            <h1 className="text-2xl font-bold ml-2">TravelEase</h1>
+            <h1 className="text-2xl font-bold ml-2">TripChalein</h1>
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create your account</h2>
           <p className="mt-2 text-sm text-gray-600">Join us and start exploring amazing destinations</p>

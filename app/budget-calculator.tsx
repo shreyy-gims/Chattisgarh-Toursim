@@ -95,20 +95,22 @@ export default function BudgetCalculator() {
 
   return (
     <Card className="w-full shadow-lg">
-      <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50">
-        <CardTitle className="flex items-center gap-2 text-xl">
-          <Calculator className="h-6 w-6 text-blue-600" />
+      <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 p-4 sm:p-6">
+        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+          <Calculator className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
           Trip Budget Calculator
         </CardTitle>
-        <p className="text-sm text-muted-foreground">Get instant cost estimates for your Chhattisgarh trip</p>
+        <p className="text-xs sm:text-sm text-muted-foreground">
+          Get instant cost estimates for your Chhattisgarh trip
+        </p>
       </CardHeader>
-      <CardContent className="space-y-6 p-6">
+      <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6">
         {/* Trip Details Section */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Trip Details</h3>
+        <div className="space-y-3 sm:space-y-4">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-800 border-b pb-2">Trip Details</h3>
 
           {/* Number of People */}
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Users className="h-4 w-4 text-blue-600" />
               Travelers:{" "}
@@ -131,7 +133,7 @@ export default function BudgetCalculator() {
           </div>
 
           {/* Number of Days */}
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Calendar className="h-4 w-4 text-green-600" />
               Duration:{" "}
@@ -155,8 +157,8 @@ export default function BudgetCalculator() {
         </div>
 
         {/* Preferences Section */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Travel Preferences</h3>
+        <div className="space-y-3 sm:space-y-4">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-800 border-b pb-2">Travel Preferences</h3>
 
           {/* Hotel Category */}
           <div className="space-y-2">
@@ -165,31 +167,31 @@ export default function BudgetCalculator() {
               Accommodation Type
             </Label>
             <Select value={hotelCategory} onValueChange={setHotelCategory}>
-              <SelectTrigger className="h-11">
+              <SelectTrigger className="h-10 sm:h-11">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="budget">
                   <div className="flex flex-col">
-                    <span className="font-medium">Budget Hotels</span>
+                    <span className="font-medium text-sm">Budget Hotels</span>
                     <span className="text-xs text-muted-foreground">₹1,500 per night</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="3-star">
                   <div className="flex flex-col">
-                    <span className="font-medium">3-Star Hotels</span>
+                    <span className="font-medium text-sm">3-Star Hotels</span>
                     <span className="text-xs text-muted-foreground">₹3,500 per night</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="4-star">
                   <div className="flex flex-col">
-                    <span className="font-medium">4-Star Hotels</span>
+                    <span className="font-medium text-sm">4-Star Hotels</span>
                     <span className="text-xs text-muted-foreground">₹6,000 per night</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="luxury">
                   <div className="flex flex-col">
-                    <span className="font-medium">Luxury Hotels</span>
+                    <span className="font-medium text-sm">Luxury Hotels</span>
                     <span className="text-xs text-muted-foreground">₹12,000 per night</span>
                   </div>
                 </SelectItem>
@@ -204,31 +206,31 @@ export default function BudgetCalculator() {
               Transportation
             </Label>
             <Select value={transportMode} onValueChange={setTransportMode}>
-              <SelectTrigger className="h-11">
+              <SelectTrigger className="h-10 sm:h-11">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="bus">
                   <div className="flex flex-col">
-                    <span className="font-medium">Bus/Public Transport</span>
+                    <span className="font-medium text-sm">Bus/Public Transport</span>
                     <span className="text-xs text-muted-foreground">₹500 per day</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="car">
                   <div className="flex flex-col">
-                    <span className="font-medium">Private Car</span>
+                    <span className="font-medium text-sm">Private Car</span>
                     <span className="text-xs text-muted-foreground">₹2,000 per day</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="suv">
                   <div className="flex flex-col">
-                    <span className="font-medium">SUV</span>
+                    <span className="font-medium text-sm">SUV</span>
                     <span className="text-xs text-muted-foreground">₹3,000 per day</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="tempo">
                   <div className="flex flex-col">
-                    <span className="font-medium">Tempo Traveller</span>
+                    <span className="font-medium text-sm">Tempo Traveller</span>
                     <span className="text-xs text-muted-foreground">₹4,000 per day</span>
                   </div>
                 </SelectItem>
@@ -243,31 +245,31 @@ export default function BudgetCalculator() {
               Dining Preference
             </Label>
             <Select value={foodPreference} onValueChange={setFoodPreference}>
-              <SelectTrigger className="h-11">
+              <SelectTrigger className="h-10 sm:h-11">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="budget">
                   <div className="flex flex-col">
-                    <span className="font-medium">Street Food & Local</span>
+                    <span className="font-medium text-sm">Street Food & Local</span>
                     <span className="text-xs text-muted-foreground">₹300 per person/day</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="local">
                   <div className="flex flex-col">
-                    <span className="font-medium">Local Restaurants</span>
+                    <span className="font-medium text-sm">Local Restaurants</span>
                     <span className="text-xs text-muted-foreground">₹600 per person/day</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="restaurant">
                   <div className="flex flex-col">
-                    <span className="font-medium">Good Restaurants</span>
+                    <span className="font-medium text-sm">Good Restaurants</span>
                     <span className="text-xs text-muted-foreground">₹1,200 per person/day</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="premium">
                   <div className="flex flex-col">
-                    <span className="font-medium">Premium Dining</span>
+                    <span className="font-medium text-sm">Premium Dining</span>
                     <span className="text-xs text-muted-foreground">₹2,000 per person/day</span>
                   </div>
                 </SelectItem>
@@ -277,56 +279,56 @@ export default function BudgetCalculator() {
         </div>
 
         {/* Budget Breakdown */}
-        <div className="bg-gradient-to-r from-blue-50 to-green-50 p-5 rounded-xl border">
-          <h4 className="font-semibold flex items-center gap-2 mb-4 text-gray-800">
-            <IndianRupee className="h-5 w-5 text-green-600" />
+        <div className="bg-gradient-to-r from-blue-50 to-green-50 p-4 sm:p-5 rounded-xl border">
+          <h4 className="font-semibold flex items-center gap-2 mb-3 sm:mb-4 text-gray-800 text-sm sm:text-base">
+            <IndianRupee className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
             Budget Breakdown
           </h4>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between py-2 border-b border-gray-200">
+          <div className="space-y-2 sm:space-y-3">
+            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
               <div className="flex items-center gap-2">
-                <Hotel className="h-4 w-4 text-purple-600" />
-                <span className="text-sm font-medium">Accommodation</span>
+                <Hotel className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+                <span className="text-xs sm:text-sm font-medium">Accommodation</span>
                 <span className="text-xs text-muted-foreground">({days} nights)</span>
               </div>
-              <span className="font-semibold">₹{budget.hotel.toLocaleString()}</span>
+              <span className="font-semibold text-xs sm:text-sm">₹{budget.hotel.toLocaleString()}</span>
             </div>
-            <div className="flex items-center justify-between py-2 border-b border-gray-200">
+            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
               <div className="flex items-center gap-2">
-                <Car className="h-4 w-4 text-orange-600" />
-                <span className="text-sm font-medium">Transportation</span>
+                <Car className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
+                <span className="text-xs sm:text-sm font-medium">Transportation</span>
                 <span className="text-xs text-muted-foreground">({days} days)</span>
               </div>
-              <span className="font-semibold">₹{budget.transport.toLocaleString()}</span>
+              <span className="font-semibold text-xs sm:text-sm">₹{budget.transport.toLocaleString()}</span>
             </div>
-            <div className="flex items-center justify-between py-2 border-b border-gray-200">
+            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
               <div className="flex items-center gap-2">
-                <UtensilsCrossed className="h-4 w-4 text-red-600" />
-                <span className="text-sm font-medium">Food & Dining</span>
+                <UtensilsCrossed className="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
+                <span className="text-xs sm:text-sm font-medium">Food & Dining</span>
                 <span className="text-xs text-muted-foreground">
                   ({people} × {days} days)
                 </span>
               </div>
-              <span className="font-semibold">₹{budget.food.toLocaleString()}</span>
+              <span className="font-semibold text-xs sm:text-sm">₹{budget.food.toLocaleString()}</span>
             </div>
-            <div className="flex items-center justify-between py-2 border-b border-gray-200">
+            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-blue-600" />
-                <span className="text-sm font-medium">Activities & Sightseeing</span>
+                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+                <span className="text-xs sm:text-sm font-medium">Activities & Sightseeing</span>
                 <span className="text-xs text-muted-foreground">
                   ({people} × {days} days)
                 </span>
               </div>
-              <span className="font-semibold">₹{budget.activities.toLocaleString()}</span>
+              <span className="font-semibold text-xs sm:text-sm">₹{budget.activities.toLocaleString()}</span>
             </div>
 
             {/* Total Section */}
-            <div className="bg-white p-4 rounded-lg mt-4">
+            <div className="bg-white p-3 sm:p-4 rounded-lg mt-3 sm:mt-4">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-lg font-bold text-gray-800">Total Budget</span>
-                <span className="text-2xl font-bold text-green-600">₹{budget.total.toLocaleString()}</span>
+                <span className="text-base sm:text-lg font-bold text-gray-800">Total Budget</span>
+                <span className="text-xl sm:text-2xl font-bold text-green-600">₹{budget.total.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between items-center text-sm">
+              <div className="flex justify-between items-center text-xs sm:text-sm">
                 <span className="text-muted-foreground">Cost per person</span>
                 <span className="font-semibold text-blue-600">₹{budget.perPerson.toLocaleString()}</span>
               </div>
@@ -334,8 +336,8 @@ export default function BudgetCalculator() {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="bg-gray-50">
-        <Button className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700">
+      <CardFooter className="bg-gray-50 p-4 sm:p-6">
+        <Button className="w-full h-10 sm:h-12 text-sm sm:text-lg font-semibold bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700">
           Plan Trip with This Budget
         </Button>
       </CardFooter>

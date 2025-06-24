@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Calendar, Globe, Map, MapPin, Compass, Users } from "lucide-react"
+import { ArrowRight, Calendar, Globe, Map, MapPin, Compass, Users, Menu } from 'lucide-react'
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -29,6 +29,16 @@ export default function Home() {
             />
             <span className="text-xl font-bold"></span>
           </div>
+
+          {/* Mobile Button menu */}
+          <Button variant="ghost" size="sm"
+            className="md:hidden"><Menu className="h-5 w-5" />
+          </Button>
+
+          {/* Mobile Button menu */}
+          <nav className="hidden md:flex item-centre gap-4 lg:gap-6"></nav>
+
+
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/destination" className="text-sm font-medium hover:underline underline-offset-4">
               Destinations
@@ -47,11 +57,15 @@ export default function Home() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" className="hidden md:flex">
-              Login
-            </Button>
-            <Button size="sm">Book Now</Button>
-          </div>
+  <Link href="/login">
+    <Button variant="outline" size="sm" className="hidden md:flex">
+      Login
+    </Button>
+  </Link>
+  <Link href="/signup">
+    <Button size="sm">Book Now</Button>
+  </Link>
+</div>
         </div>
       </header>
       <main className="flex-1">

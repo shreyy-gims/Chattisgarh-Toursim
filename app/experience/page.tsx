@@ -20,7 +20,7 @@ const experiences = [
     authorImage: "/placeholder.svg?height=100&width=100",
     date: "March 15, 2024",
     readTime: "5 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/chitrakote.jpg",
     category: "Nature",
     likes: 124,
     comments: 18,
@@ -37,7 +37,7 @@ const experiences = [
     authorImage: "/placeholder.svg?height=100&width=100",
     date: "February 28, 2024",
     readTime: "8 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/godna.png",
     category: "Culture",
     likes: 89,
     comments: 12,
@@ -54,7 +54,7 @@ const experiences = [
     authorImage: "/placeholder.svg?height=100&width=100",
     date: "January 20, 2024",
     readTime: "6 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/national-parks-india-1.jpg",
     category: "Wildlife",
     likes: 156,
     comments: 24,
@@ -71,7 +71,7 @@ const experiences = [
     authorImage: "/placeholder.svg?height=100&width=100",
     date: "December 10, 2023",
     readTime: "7 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/tribalmuseum.png",
     category: "Heritage",
     likes: 203,
     comments: 31,
@@ -88,7 +88,7 @@ const experiences = [
     authorImage: "/placeholder.svg?height=100&width=100",
     date: "November 5, 2023",
     readTime: "9 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/mario.png",
     category: "Festival",
     likes: 178,
     comments: 27,
@@ -105,7 +105,7 @@ const experiences = [
     authorImage: "/placeholder.svg?height=100&width=100",
     date: "October 18, 2023",
     readTime: "4 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/tigerpoint (2).jpg",
     category: "Adventure",
     likes: 92,
     comments: 15,
@@ -127,13 +127,7 @@ export default function ExperiencePage() {
               </Button>
             </Link>
             <div className="flex items-center gap-2">
-              <Image
-                src="/placeholder.svg?height=32&width=32"
-                alt="Chhattisgarh Tourism Logo"
-                width={32}
-                height={32}
-                className="rounded-md"
-              />
+              
               <span className="text-lg font-bold">Travel Experiences</span>
             </div>
           </div>

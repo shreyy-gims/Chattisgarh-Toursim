@@ -14,7 +14,7 @@ const cultureData = {
       title: "Bastar Dussehra",
       description:
         "The world's longest festival celebrated for 75 days, showcasing unique tribal traditions and rituals.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/dushera.png",
       duration: "75 days",
       location: "Bastar",
       season: "September - November",
@@ -25,7 +25,7 @@ const cultureData = {
       title: "Hareli Festival",
       description:
         "Agricultural festival marking the beginning of farming season with bullock worship and folk performances.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/harelii.png",
       duration: "1 day",
       location: "Statewide",
       season: "July - August",
@@ -35,7 +35,7 @@ const cultureData = {
       id: 3,
       title: "Madai Festival",
       description: "Tribal fair celebrated by Gond and Maria tribes with colorful processions and handicraft markets.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/madai.png",
       duration: "3-5 days",
       location: "Bastar Region",
       season: "December - February",
@@ -48,7 +48,7 @@ const cultureData = {
       title: "Panthi Dance",
       description:
         "Traditional dance form performed during religious festivals, especially associated with Satnami community.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/panthidance.png",
       origin: "Satnami Community",
       occasion: "Religious Festivals",
       characteristics: ["Rhythmic Movements", "Group Performance", "Devotional Songs", "Traditional Costumes"],
@@ -57,7 +57,7 @@ const cultureData = {
       id: 2,
       title: "Raut Nacha",
       description: "Folk dance performed by Yadav community depicting stories of Lord Krishna and his adventures.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/rautnacha.jpg",
       origin: "Yadav Community",
       occasion: "Dev Uthani Ekadashi",
       characteristics: ["Krishna Stories", "Colorful Costumes", "Musical Instruments", "Dramatic Performance"],
@@ -66,7 +66,7 @@ const cultureData = {
       id: 3,
       title: "Karma Dance",
       description: "Tribal dance celebrating the worship of Karma tree, performed during Karma festival.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/karmadance.png",
       origin: "Tribal Communities",
       occasion: "Karma Festival",
       characteristics: ["Nature Worship", "Circular Formation", "Traditional Songs", "Seasonal Celebration"],
@@ -77,7 +77,7 @@ const cultureData = {
       id: 1,
       title: "Chila",
       description: "Traditional rice pancake served with various chutneys and curries, a staple breakfast dish.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/mongchilla.png",
       type: "Breakfast",
       ingredients: ["Rice", "Lentils", "Spices"],
       region: "Statewide",
@@ -86,16 +86,16 @@ const cultureData = {
       id: 2,
       title: "Farra",
       description: "Steamed rice flour dumplings stuffed with spiced lentils, a popular snack and festival food.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/farra.png",
       type: "Snack",
       ingredients: ["Rice Flour", "Lentils", "Spices"],
       region: "Central Chhattisgarh",
     },
     {
       id: 3,
-      title: "Bafauri",
-      description: "Steamed lentil cakes served with spicy chutney, a healthy and nutritious traditional dish.",
-      image: "/placeholder.svg?height=400&width=600",
+      title: "Chapda",
+      description: "Chapda is a spicy, tangy chutney made by grinding red ants and their eggs with garlic, ginger, salt, chili, and coriander.",
+      image: "/chapda.png",
       type: "Main Course",
       ingredients: ["Chana Dal", "Spices", "Herbs"],
       region: "Bastar",
@@ -106,7 +106,7 @@ const cultureData = {
       id: 1,
       title: "Dhokra Art",
       description: "Ancient lost-wax metal casting technique used to create intricate brass and bronze artifacts.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/dhokra.png",
       technique: "Lost-wax casting",
       materials: ["Brass", "Bronze", "Wax"],
       products: ["Figurines", "Jewelry", "Decorative Items"],
@@ -115,7 +115,7 @@ const cultureData = {
       id: 2,
       title: "Bamboo Craft",
       description: "Traditional bamboo weaving creating functional and decorative items using locally sourced bamboo.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/bamboo.png",
       technique: "Weaving",
       materials: ["Bamboo", "Natural Dyes"],
       products: ["Baskets", "Furniture", "Decorative Items"],
@@ -125,7 +125,7 @@ const cultureData = {
       title: "Godna Art",
       description:
         "Traditional tattoo art form now adapted to canvas and walls, featuring geometric and nature patterns.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/godna.png",
       technique: "Pattern Drawing",
       materials: ["Natural Pigments", "Canvas"],
       products: ["Wall Art", "Canvas Paintings", "Body Art"],
@@ -136,7 +136,7 @@ const cultureData = {
       id: 1,
       title: "Pandavani",
       description: "Musical storytelling tradition narrating tales from Mahabharata, performed by traveling artists.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/pandvani.jpg",
       style: "Narrative Singing",
       instruments: ["Tambura", "Manjira"],
       themes: ["Mahabharata", "Moral Stories"],
@@ -145,7 +145,7 @@ const cultureData = {
       id: 2,
       title: "Bihav Geet",
       description: "Traditional wedding songs sung during marriage ceremonies, expressing joy and blessings.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/bihavgeet.jpg",
       style: "Folk Songs",
       instruments: ["Dhol", "Manjeera"],
       themes: ["Wedding", "Celebration", "Blessings"],
@@ -154,7 +154,7 @@ const cultureData = {
       id: 3,
       title: "Sohar Geet",
       description: "Songs sung during childbirth and naming ceremonies, celebrating new life and family joy.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/sohargeet.jpg",
       style: "Ceremonial Songs",
       instruments: ["Traditional Drums"],
       themes: ["Birth", "Family", "Celebration"],
@@ -176,13 +176,6 @@ export default function CulturePage() {
               </Button>
             </Link>
             <div className="flex items-center gap-2">
-              <Image
-                src="/placeholder.svg?height=32&width=32"
-                alt="Chhattisgarh Tourism Logo"
-                width={32}
-                height={32}
-                className="rounded-md"
-              />
               <span className="text-lg font-bold">Culture & Heritage</span>
             </div>
           </div>
@@ -204,7 +197,7 @@ export default function CulturePage() {
         {/* Hero Section */}
         <section className="relative h-[60vh] overflow-hidden">
           <Image
-            src="/placeholder.svg?height=800&width=1600"
+            src="/national-parks-india-1.jpg"
             alt="Chhattisgarh Culture"
             fill
             className="object-cover"
