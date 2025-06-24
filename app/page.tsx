@@ -1,7 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Calendar, Globe, Map, MapPin, Compass, Users } from "lucide-react"
-import "react-datepicker/dist/react-datepicker.css";
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,79 +10,72 @@ import { Separator } from "@/components/ui/separator"
 
 import DestinationCard from "@/app/destination-card"
 import VirtualTourViewer from "@/app/virtual-tour-viewer"
-import TripPlanner from "@/app/trip-planner"
+import BudgetCalculator from "@/app/budget-calculator"
 import TestimonialCarousel from "@/app/testimonial-carousel"
 import CulturalExperiences from "@/app/cultural-experiences"
 import NewsletterSignup from "@/app/newsletter-signup"
+import DestinationTypeCard from "@/app/destination-type-card"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center">
-          <div className="flex items-center gap-29">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2">
             <Image
               src="/log.jpg"
               alt="Chhattisgarh Tourism Logo"
               width={40}
               height={40}
-              className="rounded-full ml-4"
+              className="rounded-md"
             />
             <span className="text-xl font-bold"></span>
           </div>
-          <nav className="hidden md:flex items-center gap-7 mx-auto">
-            <Link href="/dest/pagee.tsx" className="text-sm font-medium hover:underline underline-offset-4">
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/destination" className="text-sm font-medium hover:underline underline-offset-4">
               Destinations
             </Link>
-            <Link href="#experiences" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="/experience" className="text-sm font-medium hover:underline underline-offset-4">
               Experiences
             </Link>
-            <Link href="#plan" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="/plan" className="text-sm font-medium hover:underline underline-offset-4">
               Plan Your Trip
             </Link>
-            <Link href="#culture" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="/culture" className="text-sm font-medium hover:underline underline-offset-4">
               Culture
             </Link>
             <Link href="#gallery" className="text-sm font-medium hover:underline underline-offset-4">
               Gallery
             </Link>
           </nav>
-        <div className="flex items-center gap-8 ml-auto">
-          <Link href="/auth/login" passHref>
-            <Button variant="outline" size="sm" className="hidden md:flex ml-8">
-            Login
+          <div className="flex items-center gap-4">
+            <Button variant="outline" size="sm" className="hidden md:flex">
+              Login
             </Button>
-          </Link>
-
-          <Link href="/signup" passHref>
-            <Button size="sm">
-          Sign in
-            </Button>
-          </Link>
+            <Button size="sm">Book Now</Button>
+          </div>
         </div>
-      </div>
       </header>
-      <main className="flex-5s">
+      <main className="flex-1">
         {/* Hero Section */}
         <section className="relative h-[90vh] overflow-hidden">
-<div className="absolute inset-0">
-  <Image
-    src="/buffalo.jpg" // ✅ correct path
-    alt="Chhattisgarh landscape"
-    fill
-    className="object-cover"
-    priority
-  />
-  <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
-</div>
-
+          <div className="absolute inset-0">
+            <Image
+              src="/buffalo.jpg"
+              alt="Chhattisgarh landscape"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
+          </div>
           <div className="container relative z-10 flex h-full flex-col items-start justify-center gap-6 pt-16">
             <Badge className="bg-green-600 hover:bg-green-700">Discover Chhattisgarh</Badge>
             <h1 className="max-w-3xl text-4xl font-bold tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Experience the Heart of Incredible Chhattisgarh
+              Experience the Heart of Incredible India
             </h1>
             <p className="max-w-[600px] text-lg text-white/90 md:text-xl">
-              Explore ancient temples, lush forests, vibrant tribal cultures, and pristine waterfalls in Chhattisgarh's hidden
+              Explore ancient temples, lush forests, vibrant tribal cultures, and pristine waterfalls in India's hidden
               gem.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -98,120 +90,75 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent h-24" />
         </section>
 
-        {/* Search and Filter Section */}
-        <section className="container relative -mt-27 z-27">
-          <Card className="border shadow-none">
-            <CardContent className="p-6">
-              <Tabs defaultValue="destinations" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 mb-6">
-                  <TabsTrigger value="destinations">Destinations</TabsTrigger>
-                  <TabsTrigger value="experiences">Experiences</TabsTrigger>
-                  <TabsTrigger value="packages">Packages</TabsTrigger>
-                </TabsList>
-                <TabsContent value="destinations" className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="relative">
-                      <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Where to go?"
-                        list="destinations"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                      <datalist id="destinations">
-                        <option value="Chitrakote Watefall"/>
-                        <option value="Tirathgarh Waterfall"/>
-                        <option value="Bhoram Dev Temple"/>
-                        <option value="Jatmai Ghatarani Temple"/>
-                        <option value="Ranidhara Waterfall"/>
-                        <option value="Dhaskund Waterfall"/>
-                        <option value="Dev Bawali Waterfall"/>
-                        <option value="Kanha Kesli"/>
-                        </datalist>
-                    </div>
-                    <div className="flex-1">
-                      <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        id="start-date"
-                        type="date"
-                        placeholder="When?"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="number"
-                        min="1"
-                        max="100"
-                        placeholder="Travelers"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <Button className="w-full">Search</Button>
-                  </div>
-                </TabsContent>
-                <TabsContent value="experiences" className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="relative">
-                      <Compass className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Activity type"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="date"
-                        placeholder="When?"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Group size"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <Button className="w-full">Search</Button>
-                  </div>
-                </TabsContent>
-                <TabsContent value="packages" className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="relative">
-                      <Globe className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Package type"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Duration"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Budget"
-                        className="w-full rounded-md border border-input bg-background px-9 py-3 text-sm"
-                      />
-                    </div>
-                    <Button className="w-full">Search</Button>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
+        
+
+        {/* Destination Types Section */}
+        <section className="container py-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight mb-2">Explore by Category</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Discover Chhattisgarh through different types of destinations and experiences
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <DestinationTypeCard
+              title="Waterfalls"
+              description="Discover breathtaking waterfalls including Chitrakote Falls, the 'Niagara of India'"
+              image="/waterfall.png"
+              icon="💧"
+              count="15+ Waterfalls"
+              href="/destination/waterfall"
+            />
+            <DestinationTypeCard
+              title="National Parks"
+              description="Explore diverse wildlife sanctuaries and national parks with rich biodiversity"
+              image="/national.png"
+              icon="🌲"
+              count="8+ Parks"
+              href="/destination/national-park"
+            />
+            <DestinationTypeCard
+              title="Temples"
+              description="Visit ancient temples showcasing architectural marvels and spiritual heritage"
+              image="/vishnumandir.jpg"
+              icon="🏛️"
+              count="25+ Temples"
+              href="/destination/temple"
+            />
+            <DestinationTypeCard
+              title="Water Parks"
+              description="Enjoy fun-filled water parks perfect for family entertainment and recreation"
+              image="/waterpark.png"
+              icon="🏊"
+              count="5+ Water Parks"
+              href="/destination/waterpark"
+            />
+            <DestinationTypeCard
+              title="Tour Packages"
+              description="Choose from curated tour packages designed for different interests and budgets"
+              image="/tour.png"
+              icon="📦"
+              count="20+ Packages"
+              href="/destination/packages"
+            />
+            <DestinationTypeCard
+              title="Cultural Sites"
+              description="Experience rich tribal culture, traditional arts, and local festivals"
+              image="/hanumanbhilai.jpg"
+              icon="🎭"
+              count="30+ Sites"
+              href="/destination/cultural"
+            />
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link href="/dest">
+              <Button variant="outline" className="gap-2">
+                View All Destinations <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </section>
 
         {/* Featured Destinations */}
@@ -228,22 +175,13 @@ export default function Home() {
                 All Destinations
               </Button>
               <Button variant="outline" size="sm">
-                Waterfalls
+                Nature
               </Button>
               <Button variant="outline" size="sm">
-                Temples
+                Heritage
               </Button>
               <Button variant="outline" size="sm">
-                Mountains
-              </Button>
-              <Button variant="outline" size="sm">
-                National Park
-              </Button>
-              <Button variant="outline" size="sm">
-                Waterparks
-              </Button>
-              <Button variant="outline" size="sm">
-                Packages
+                Tribal
               </Button>
             </div>
           </div>
@@ -258,17 +196,17 @@ export default function Home() {
               category="Nature"
             />
             <DestinationCard
-              title="Dholkal"
-              description="Beautiful spot located 3000 feet high in the Bailadila Mountain ranges in District Dantewada"
+              title="Dholkal Temple"
+              description="Ancient Buddhist and Hindu archaeological site with temples dating back to the 5th-8th century"
               image="/dholkal.jpg"
-              location="Dantewada"
+              location="Kawardha"
               rating={4.6}
               category="Heritage"
             />
             <DestinationCard
-              title="Onakona Temple"
+              title="Tiger Point"
               description="Home to diverse wildlife including leopards, bears, and hundreds of bird species"
-              image="/Onakona Temple.jpg"
+              image="/tigerpoint (2).jpg"
               location="Raipur"
               rating={4.5}
               category="Wildlife"
@@ -282,31 +220,29 @@ export default function Home() {
               category="Heritage"
             />
             <DestinationCard
-              title="Tiger Point Waterafall"
-              description="Featuring waterfalls, and rich biodiversity"
-              image="/tigerpoint (2).jpg"
-              location="Mainpat"
+              title="Kanger Valley National Park"
+              description="Featuring stunning caves, waterfalls, and rich biodiversity"
+              image="/national-parks-india-1.jpg"
+              location="Bastar"
               rating={4.9}
               category="Nature"
             />
             <DestinationCard
-              title="Vishnu Manir"
+              title="Tribal Museum"
               description="Showcasing the rich cultural heritage of Chhattisgarh's tribal communities"
-              image="/vishnumandir.jpg"
-              location="Janjgir"
+              image="/tribalmuseum.png"
+              location="Raipur"
               rating={4.4}
               category="Culture"
             />
           </div>
 
-         
-
           <div className="mt-10 text-center">
-           <Button variant="outline" asChild className="gap-2">
-             <Link href="/dest">
-             View All Destinations <ArrowRight className="h-4 w-4" />
-             </Link>
-           </Button>
+            <Link href="/destination"> {/* <-- Replace with your actual route */}
+            <Button variant="outline" className="gap-2">
+            View All Destinations <ArrowRight className="h-4 w-4" />
+            </Button>
+            </Link>
           </div>
         </section>
 
@@ -330,58 +266,80 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Trip Planner */}
+        {/* Budget Calculator */}
         <section id="plan" className="container py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight mb-4">Plan Your Perfect Trip</h2>
-              <p className="text-muted-foreground mb-6">
-                Our AI-powered trip planner helps you create a personalized itinerary based on your preferences, budget,
-                and travel dates. Get recommendations for destinations, accommodations, and activities.
-              </p>
+      <h2 className="text-3xl font-bold tracking-tight mb-4">Trip Budget Calculator</h2>
+      <p className="text-lg font-semibold mb-2">
+        Get an instant estimate of your trip cost to Chhattisgarh.
+      </p>
+      <p className="text-muted-foreground mb-6">
+        Our smart calculator considers accommodation, transportation, food, and activities to give you a realistic budget range for your perfect getaway. Whether you're planning a weekend escape or a long vacation, our tool simplifies the process with precision and convenience.
+      </p>
 
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <Calendar className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Personalized Itineraries</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Get a day-by-day plan tailored to your interests and travel style
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <Map className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Interactive Maps</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Visualize your journey with detailed maps and directions
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <Globe className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Local Insights</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Discover hidden gems and authentic experiences recommended by locals
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <TripPlanner />
+      {/* Feature List */}
+      <div className="space-y-5">
+        {/* Instant Cost Estimation */}
+        <div className="flex items-start gap-3">
+          <div className="bg-primary/10 p-2 rounded-full">
+            <Calendar className="h-5 w-5 text-primary" />
           </div>
-        </section>
+          <div>
+            <h3 className="font-medium">Instant Cost Estimation</h3>
+            <p className="text-sm text-muted-foreground">
+              Get real-time budget calculations based on your travel preferences
+            </p>
+          </div>
+        </div>
+
+        {/* Detailed Breakdown */}
+        <div className="flex items-start gap-3">
+          <div className="bg-primary/10 p-2 rounded-full">
+            <Map className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <h3 className="font-medium">Detailed Breakdown</h3>
+            <p className="text-sm text-muted-foreground">
+              See costs for hotels, transport, meals, and activities separately
+            </p>
+          </div>
+        </div>
+
+        {/* Budget Optimization */}
+        <div className="flex items-start gap-3">
+          <div className="bg-primary/10 p-2 rounded-full">
+            <Globe className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <h3 className="font-medium">Budget Optimization</h3>
+            <p className="text-sm text-muted-foreground">
+              Get suggestions to optimize your budget without compromising experience
+            </p>
+          </div>
+        </div>
+
+        {/* Customized Suggestions */}
+        <div className="flex items-start gap-3">
+          <div className="bg-primary/10 p-2 rounded-full">
+            <Map className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <h3 className="font-medium">Customized Suggestions</h3>
+            <p className="text-sm text-muted-foreground">
+              Get location-based insights and curated travel recommendations
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Right Side: Budget Calculator */}
+    <div>
+      <BudgetCalculator />
+    </div>
+  </div>
+</section>
 
         {/* Cultural Experiences */}
         <section id="culture" className="bg-muted py-20">
@@ -423,7 +381,7 @@ export default function Home() {
               <div className="grid gap-4">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/neelamsariwaterfall.jpg"
+                    src="/dholkal.jpg"
                     alt="Chhattisgarh landscape"
                     width={400}
                     height={600}
@@ -432,7 +390,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/bhilaisteelplant.jpg"
+                    src="/neelamsariwaterfall.jpg"
                     alt="Chhattisgarh culture"
                     width={400}
                     height={400}
@@ -443,7 +401,7 @@ export default function Home() {
               <div className="grid gap-4">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/bamboo.png"
+                    src="/Onakona Temple.jpg"
                     alt="Chhattisgarh temple"
                     width={400}
                     height={400}
@@ -452,7 +410,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/village.jpg"
+                    src="/tribedrummer.jpg"
                     alt="Chhattisgarh waterfall"
                     width={400}
                     height={600}
@@ -463,7 +421,7 @@ export default function Home() {
               <div className="grid gap-4">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/tribedrummer.jpg"
+                    src="/village.jpg"
                     alt="Chhattisgarh tribal art"
                     width={400}
                     height={600}
@@ -472,7 +430,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/neelamsariwaterfall.jpg"
+                    src="/vishnumandir.jpg"
                     alt="Chhattisgarh wildlife"
                     width={400}
                     height={400}
@@ -483,7 +441,7 @@ export default function Home() {
               <div className="grid gap-4">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/ghatarani.jpg"
+                    src="/bhilaisteelplant.jpg"
                     alt="Chhattisgarh food"
                     width={400}
                     height={400}
@@ -492,7 +450,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/buffalo.jpg"
+                    src="/ghatarani.jpg"
                     alt="Chhattisgarh festival"
                     width={400}
                     height={600}
@@ -568,7 +526,7 @@ export default function Home() {
                   </svg>
                   <span className="sr-only">Twitter</span>
                 </Link>
-                <Link href="https://www.instagram.com/tripchalein?igsh=MTdocGUzNjhnaWNmNw==" className="text-muted-foreground hover:text-foreground">
+                <Link href="#" className="text-muted-foreground hover:text-foreground">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -612,27 +570,27 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    About Us
+                    About Chhattisgarh
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">FGTG
+                  <Link href="/destination" className="text-muted-foreground hover:text-foreground">
                     Destinations
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/experience" className="text-muted-foreground hover:text-foreground">
                     Experiences
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/plan" className="text-muted-foreground hover:text-foreground">
                     Plan Your Trip
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    Travel Guide
+                  <Link href="/culture" className="text-muted-foreground hover:text-foreground">
+                    Culture
                   </Link>
                 </li>
                 <li>
@@ -646,32 +604,32 @@ export default function Home() {
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/faq" className="text-muted-foreground hover:text-foreground">
                     FAQs
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/contact" className="text-muted-foreground hover:text-foreground">
                     Contact Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/terms" className="text-muted-foreground hover:text-foreground">
                     Terms & Conditions
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/cancellation" className="text-muted-foreground hover:text-foreground">
                     Cancellation Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/feedback" className="text-muted-foreground hover:text-foreground">
                     Feedback
                   </Link>
                 </li>
@@ -681,8 +639,8 @@ export default function Home() {
               <h3 className="font-semibold mb-4">Contact Information</h3>
               <address className="not-italic text-muted-foreground space-y-2">
                 <p>Chhattisgarh Tourism Board</p>
-                <p>Sec 10 St 42 Qua-6/B</p>
-                <p>Bhilai, Chhattisgarh 490009</p>u
+                <p>2nd Floor, Udyog Bhawan</p>
+                <p>Raipur, Chhattisgarh 492001</p>
                 <p className="pt-2">
                   <a href="tel:+917712422788" className="hover:text-foreground">
                     Phone: +91 771 242 2788
@@ -690,7 +648,7 @@ export default function Home() {
                 </p>
                 <p>
                   <a href="mailto:info@chhattisgarhtourism.in" className="hover:text-foreground">
-                    Email: info@tripchalein.in
+                    Email: info@chhattisgarhtourism.in
                   </a>
                 </p>
               </address>

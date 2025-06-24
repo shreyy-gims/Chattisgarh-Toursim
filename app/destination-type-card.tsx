@@ -1,0 +1,53 @@
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+
+interface DestinationTypeCardProps {
+  title: string
+  description: string
+  image: string
+  icon: string
+  count: string
+  href: string
+}
+
+export default function DestinationTypeCard({
+  title,
+  description,
+  image,
+  icon,
+  count,
+  href,
+}: DestinationTypeCardProps) {
+  return (
+    <Card className="overflow-hidden group hover:shadow-lg transition-all duration-300">
+      <div className="relative h-48 overflow-hidden">
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <div className="absolute top-3 left-3 text-2xl bg-white/90 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center">
+          {icon}
+        </div>
+        <Badge className="absolute top-3 right-3 bg-black/70 text-white">{count}</Badge>
+      </div>
+      <CardContent className="p-6">
+        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-muted-foreground text-sm line-clamp-2">{description}</p>
+      </CardContent>
+      <CardFooter className="p-6 pt-0">
+        <Link href={href} className="w-full">
+          <Button className="w-full gap-2 group-hover:bg-primary/90 transition-colors">
+            Plan Your Trip <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
+      </CardFooter>
+    </Card>
+  )
+}

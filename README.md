@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -34,3 +35,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+=======
+# Chattisgarh-Toursim
+This website is a comprehensive platform designed to simplify and enhance short trip planning within your state. It provides users with a seamless experience by offering a wide range of services, including car rentals, camping equipment, cooking utensils, and professional camera rentals—ensuring that every aspect of the journey is covered.
+>>>>>>> 4e54baa8f31f886cca4fe5aa226be5980aef7042
