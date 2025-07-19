@@ -15,6 +15,7 @@ const destinations = [
     description:
       "India's widest waterfall, often called the 'Niagara of India'. Experience the thunderous roar and misty spray of this magnificent natural wonder.",
     image: "/chitrakote.jpg",
+    video: "public\chitrakotevid2.mp4",
     category: "waterfall",
     location: "Bastar",
     rating: 4.8,

@@ -20,15 +20,17 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <Image
-              src="/log.jpg"
-              alt="Chhattisgarh Tourism Logo"
-              width={40}
-              height={40}
-              className="rounded-md"
-            />
-            <span className="text-xl font-bold"></span>
-          </div>
+  <Link href="/" className="flex items-center gap-2">
+    <Image
+      src="/log.jpg"
+      alt="Chhattisgarh Tourism Logo"
+      width={60}
+      height={40}
+      className="rounded-md"
+    />
+    <span className="text-xl font-bold"></span>
+  </Link>
+</div>
 
           {/* Mobile Button menu */}
           <Button variant="ghost" size="sm"
@@ -52,7 +54,7 @@ export default function Home() {
             <Link href="/culture" className="text-sm font-medium hover:underline underline-offset-4">
               Culture
             </Link>
-            <Link href="#gallery" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="/gallery" className="text-sm font-medium hover:underline underline-offset-4">
               Gallery
             </Link>
           </nav>
@@ -91,12 +93,18 @@ export default function Home() {
               gem.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
+
+             <Link href="/destination">
               <Button size="lg" className="gap-2">
                 Explore Destinations <ArrowRight className="h-4 w-4" />
               </Button>
+              </Link>
+
+              <Link href="/">
               <Button size="lg" variant="outline" className="bg-white/10 text-white hover:bg-white/20">
                 Virtual Tours
               </Button>
+              </Link>
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent h-24" />
@@ -165,7 +173,7 @@ export default function Home() {
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="/dest">
+            <Link href="/destination">
               <Button variant="outline" className="gap-2">
                 View All Destinations <ArrowRight className="h-4 w-4" />
               </Button>
