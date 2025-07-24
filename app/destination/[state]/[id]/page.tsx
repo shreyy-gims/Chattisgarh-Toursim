@@ -3,14 +3,40 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Calendar, Clock, MapPin, Star, Users, Camera, Share2 } from "lucide-react"
-
+import { useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useStateContext } from "@/contexts/state-context"
 
-const destinationDetails = {
+type Destination = {
+  title: string
+  description: string
+  longDescription: string
+  video?: string // ✅ optional video field
+  images: string[]
+  category: string
+  location: string
+  rating: number
+  reviews: number
+  duration: string
+  bestTime: string
+  entryFee: string
+  timings: string
+  highlights: string[]
+  activities: string[]
+  nearbyAttractions: string[]
+  howToReach: string
+  accommodation: string[]
+}
+
+const destinationDetails: {
+  [state: string]: {
+    [id: number]: Destination
+  }
+} = {
+
   chhattisgarh: {
     1: {
       title: "Chitrakote Falls",
@@ -18,12 +44,13 @@ const destinationDetails = {
         "India's widest waterfall, often called the 'Niagara of India'. Experience the thunderous roar and misty spray of this magnificent natural wonder.",
       longDescription:
         "Chitrakote Falls is a spectacular natural wonder located in the Bastar district of Chhattisgarh. During monsoon season, the waterfall spans nearly 300 meters in width, making it the widest waterfall in India. The falls cascade down from a height of 30 meters, creating a mesmerizing curtain of water that produces a thunderous roar audible from kilometers away. The surrounding area is rich in biodiversity, with dense forests home to various wildlife species. The best time to visit is during the monsoon and post-monsoon months when the water flow is at its peak.",
-      images: [
-        "/chitrakote.jpg",
-        "/placeholder.svg?height=400&width=600&text=Chitrakote+Falls+Monsoon",
-        "/placeholder.svg?height=400&width=600&text=Chitrakote+Falls+Rainbow",
-        "/placeholder.svg?height=400&width=600&text=Chitrakote+Falls+Sunset",
-      ],
+      video: "/chitrakotevid2.mp4", // <-- Your video file path
+images: [
+  "/chitrakote.jpg",
+  "/placeholder.svg?height=400&width=600&text=Chitrakote+Falls+Rainbow",
+  "/placeholder.svg?height=400&width=600&text=Chitrakote+Falls+Sunset",
+],
+
       category: "waterfall",
       location: "Bastar, Chhattisgarh",
       rating: 4.8,
@@ -55,8 +82,79 @@ const destinationDetails = {
         "A spectacular multi-tiered waterfall cascading down from a height of 300 feet, surrounded by lush green forests.",
       longDescription:
         "Tirathgarh Falls is one of the most beautiful waterfalls in Chhattisgarh, located in the Kanger Valley National Park. The waterfall cascades down in multiple tiers from a height of approximately 300 feet, creating a series of natural pools. The falls are surrounded by dense forests that are home to diverse flora and fauna. The area offers excellent trekking opportunities and is a paradise for nature photographers. The sound of cascading water combined with the chirping of birds creates a symphony that soothes the soul.",
+        video: "/tirathgarhvid1.mp4",
       images: [
-        "/placeholder.svg?height=600&width=800&text=Tirathgarh+Falls+Main",
+        "/tirathgarh169.png",
+        "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Tiers",
+        "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Pool",
+        "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Trek",
+      ],
+      category: "waterfall",
+      location: "Kanger Valley, Bastar",
+      rating: 4.6,
+      reviews: 189,
+      duration: "3-4 hours",
+      bestTime: "October to March",
+      entryFee: "₹25 per person",
+      timings: "7:00 AM - 5:00 PM",
+      highlights: [
+        "Multi-tiered waterfall",
+        "Natural swimming pools",
+        "Trekking trails",
+        "Rich biodiversity",
+        "Photography spots",
+      ],
+      activities: ["Trekking", "Swimming", "Photography", "Nature walks", "Bird watching"],
+      nearbyAttractions: ["Kanger Valley National Park - 5 km", "Kutumsar Caves - 10 km", "Chitrakote Falls - 45 km"],
+      howToReach:
+        "Located 35 km from Jagdalpur via Kanger Valley National Park. The nearest airport is Raipur and railway station is Jagdalpur. Local transport available from Jagdalpur.",
+      accommodation: ["Forest Rest House, Kanger Valley", "Hotels in Jagdalpur (35 km)", "Eco-tourism camps"],
+    },
+
+    3: {
+      title: "Kanger Valley National Park",
+      description:
+        "A spectacular multi-tiered waterfall cascading down from a height of 300 feet, surrounded by lush green forests.",
+      longDescription:
+        "Tirathgarh Falls is one of the most beautiful waterfalls in Chhattisgarh, located in the Kanger Valley National Park. The waterfall cascades down in multiple tiers from a height of approximately 300 feet, creating a series of natural pools. The falls are surrounded by dense forests that are home to diverse flora and fauna. The area offers excellent trekking opportunities and is a paradise for nature photographers. The sound of cascading water combined with the chirping of birds creates a symphony that soothes the soul.",
+        video: "/tirathgarhvid1.mp4",
+      images: [
+        "/tirathgarh169.png",
+        "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Tiers",
+        "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Pool",
+        "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Trek",
+      ],
+      category: "waterfall",
+      location: "Kanger Valley, Bastar",
+      rating: 4.6,
+      reviews: 189,
+      duration: "3-4 hours",
+      bestTime: "October to March",
+      entryFee: "₹25 per person",
+      timings: "7:00 AM - 5:00 PM",
+      highlights: [
+        "Multi-tiered waterfall",
+        "Natural swimming pools",
+        "Trekking trails",
+        "Rich biodiversity",
+        "Photography spots",
+      ],
+      activities: ["Trekking", "Swimming", "Photography", "Nature walks", "Bird watching"],
+      nearbyAttractions: ["Kanger Valley National Park - 5 km", "Kutumsar Caves - 10 km", "Chitrakote Falls - 45 km"],
+      howToReach:
+        "Located 35 km from Jagdalpur via Kanger Valley National Park. The nearest airport is Raipur and railway station is Jagdalpur. Local transport available from Jagdalpur.",
+      accommodation: ["Forest Rest House, Kanger Valley", "Hotels in Jagdalpur (35 km)", "Eco-tourism camps"],
+    },
+
+    5: {
+      title: "Bhoram Dev Temple",
+      description:
+        "A spectacular multi-tiered waterfall cascading down from a height of 300 feet, surrounded by lush green forests.",
+      longDescription:
+        "Tirathgarh Falls is one of the most beautiful waterfalls in Chhattisgarh, located in the Kanger Valley National Park. The waterfall cascades down in multiple tiers from a height of approximately 300 feet, creating a series of natural pools. The falls are surrounded by dense forests that are home to diverse flora and fauna. The area offers excellent trekking opportunities and is a paradise for nature photographers. The sound of cascading water combined with the chirping of birds creates a symphony that soothes the soul.",
+        video: "/bhoramdevvid2.mp4",
+      images: [
+        "/tirathgarh169.png",
         "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Tiers",
         "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Pool",
         "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls+Trek",
@@ -605,12 +703,14 @@ interface PageProps {
   }
 }
 
-export default function DestinationDetailPage({ params }: PageProps) {
-  const { state, id } = params
+export default function DestinationDetailPage() {
+  const params = useParams()
+  const { state, id } = params as { state: string; id: string }
   const { selectedState } = useStateContext()
 
   const stateData = destinationDetails[state as keyof typeof destinationDetails]
   const destination = stateData?.[Number.parseInt(id) as keyof typeof stateData]
+
 
   if (!destination) {
     return (
@@ -651,19 +751,37 @@ export default function DestinationDetailPage({ params }: PageProps) {
         </div>
       </header>
 
+        
+
       <main className="container py-8">
         {/* Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           <div className="lg:col-span-2">
             <div className="relative h-96 lg:h-[500px] rounded-lg overflow-hidden mb-6">
-              <Image
-                src={destination.images[0] || "/placeholder.svg"}
-                alt={destination.title}
-                fill
-                className="object-cover"
-              />
-              <Badge className="absolute top-4 right-4 capitalize">{destination.category.replace("-", " ")}</Badge>
-            </div>
+  {destination.video ? (
+    <video
+      controls
+      autoPlay
+      muted
+      loop
+      className="w-full h-full object-cover rounded-lg"
+      poster={destination.images[0]}
+    >
+      <source src={destination.video} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  ) : (
+    <Image
+      src={destination.images[0] || "/placeholder.svg"}
+      alt={destination.title}
+      fill
+      className="object-cover"
+    />
+  )}
+  <Badge className="absolute top-4 right-4 capitalize">
+    {destination.category.replace("-", " ")}
+  </Badge>
+</div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {destination.images.slice(1).map((image, index) => (

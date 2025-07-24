@@ -61,7 +61,7 @@ export default function Home() {
         {
           title: "Kanger Valley National Park",
           description: "Featuring stunning caves, waterfalls, and rich biodiversity",
-          image: "/placeholder.svg?height=400&width=600&text=Kanger+Valley",
+          image: "/national.png",
           location: "Bastar",
           rating: 4.9,
           category: "Nature",
@@ -69,7 +69,7 @@ export default function Home() {
         {
           title: "Tribal Museum",
           description: "Showcasing the rich cultural heritage of Chhattisgarh's tribal communities",
-          image: "/placeholder.svg?height=400&width=600&text=Tribal+Museum",
+          image: "/tribalmuseum.png",
           location: "Raipur",
           rating: 4.4,
           category: "Culture",
@@ -437,7 +437,7 @@ export default function Home() {
         <div className="container flex h-14 sm:h-16 items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-2">
             <Image
-              src="/placeholder.svg?height=40&width=40&text=IN"
+              src="/log.jpg"
               alt={`${selectedState.name} Tourism Logo`}
               width={32}
               height={32}
@@ -534,114 +534,6 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent h-16 sm:h-24" />
         </section>
 
-        {/* Search and Filter Section */}
-        <section className="container relative -mt-8 sm:-mt-16 z-20 px-4 sm:px-6">
-          <Card className="border shadow-lg">
-            <CardContent className="p-4 sm:p-6">
-              <Tabs defaultValue="destinations" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 mb-4 sm:mb-6 h-auto">
-                  <TabsTrigger value="destinations" className="text-xs sm:text-sm py-2">
-                    Destinations
-                  </TabsTrigger>
-                  <TabsTrigger value="experiences" className="text-xs sm:text-sm py-2">
-                    Experiences
-                  </TabsTrigger>
-                  <TabsTrigger value="packages" className="text-xs sm:text-sm py-2">
-                    Packages
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="destinations" className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                    <div className="relative">
-                      <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Where to go?"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="When?"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Travelers"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <Button className="w-full py-2.5 sm:py-3">Search</Button>
-                  </div>
-                </TabsContent>
-                <TabsContent value="experiences" className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                    <div className="relative">
-                      <Compass className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Activity type"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="When?"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Group size"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <Button className="w-full py-2.5 sm:py-3">Search</Button>
-                  </div>
-                </TabsContent>
-                <TabsContent value="packages" className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                    <div className="relative">
-                      <Globe className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Package type"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Duration"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Budget"
-                        className="w-full rounded-md border border-input bg-background px-9 py-2.5 sm:py-3 text-sm"
-                      />
-                    </div>
-                    <Button className="w-full py-2.5 sm:py-3">Search</Button>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Destination Types Section */}
         <section className="container py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
@@ -655,7 +547,7 @@ export default function Home() {
             <DestinationTypeCard
               title="Waterfalls"
               description={`Discover breathtaking waterfalls across ${selectedState.name}`}
-              image="/placeholder.svg?height=400&width=600&text=Waterfalls"
+              image="/dhaskund.jpg"
               icon="💧"
               count={`${selectedState.destinations.waterfalls}+ Waterfalls`}
               href="/destination/waterfall"
@@ -663,7 +555,7 @@ export default function Home() {
             <DestinationTypeCard
               title="National Parks"
               description={`Explore diverse wildlife sanctuaries and national parks in ${selectedState.name}`}
-              image="/placeholder.svg?height=400&width=600&text=National+Parks"
+              image="/national-parks-india-1.jpg"
               icon="🌲"
               count={`${selectedState.destinations.nationalParks}+ Parks`}
               href="/destination/national-park"
@@ -671,7 +563,7 @@ export default function Home() {
             <DestinationTypeCard
               title="Temples"
               description={`Visit ancient temples showcasing architectural marvels in ${selectedState.name}`}
-              image="/placeholder.svg?height=400&width=600&text=Temples"
+              image="/Onakona Temple.jpg"
               icon="🏛️"
               count={`${selectedState.destinations.temples}+ Temples`}
               href="/destination/temple"
@@ -679,7 +571,7 @@ export default function Home() {
             <DestinationTypeCard
               title="Water Parks"
               description={`Enjoy fun-filled water parks perfect for family entertainment`}
-              image="/placeholder.svg?height=400&width=600&text=Water+Parks"
+              image="/waterpark.png"
               icon="🏊"
               count={`${selectedState.destinations.waterParks}+ Water Parks`}
               href="/destination/waterpark"
@@ -687,7 +579,7 @@ export default function Home() {
             <DestinationTypeCard
               title="Tour Packages"
               description={`Choose from curated tour packages designed for ${selectedState.name}`}
-              image="/placeholder.svg?height=400&width=600&text=Tour+Packages"
+              image="/tour.png"
               icon="📦"
               count={`${selectedState.destinations.packages}+ Packages`}
               href="/destination/packages"
@@ -695,7 +587,7 @@ export default function Home() {
             <DestinationTypeCard
               title="Cultural Sites"
               description={`Experience rich culture, traditional arts, and local festivals in ${selectedState.name}`}
-              image="/placeholder.svg?height=400&width=600&text=Cultural+Sites"
+              image="/tribalmuseum.png"
               icon="🎭"
               count={`${selectedState.destinations.culturalSites}+ Sites`}
               href="/destination/cultural"
@@ -873,7 +765,7 @@ export default function Home() {
               <div className="grid gap-2 sm:gap-4">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=600&width=400&text=Gallery+1"
+                    src="/neelamsariwaterfall.jpg"
                     alt={`${selectedState.name} landscape`}
                     width={400}
                     height={600}
@@ -882,7 +774,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=400&width=400&text=Gallery+2"
+                    src="/bhilaisteelplant.jpg"
                     alt={`${selectedState.name} culture`}
                     width={400}
                     height={400}
@@ -893,7 +785,7 @@ export default function Home() {
               <div className="grid gap-2 sm:gap-4">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=400&width=400&text=Gallery+3"
+                    src="/bamboo.png"
                     alt={`${selectedState.name} temple`}
                     width={400}
                     height={400}
@@ -902,7 +794,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=600&width=400&text=Gallery+4"
+                    src="/dholkal.jpg"
                     alt={`${selectedState.name} nature`}
                     width={400}
                     height={600}
@@ -913,7 +805,7 @@ export default function Home() {
               <div className="grid gap-2 sm:gap-4 hidden sm:block">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=600&width=400&text=Gallery+5"
+                    src="/village.jpg"
                     alt={`${selectedState.name} heritage`}
                     width={400}
                     height={600}
@@ -922,7 +814,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=400&width=400&text=Gallery+6"
+                    src="/tigerpoint (2).jpg"
                     alt={`${selectedState.name} wildlife`}
                     width={400}
                     height={400}
@@ -933,7 +825,7 @@ export default function Home() {
               <div className="grid gap-2 sm:gap-4 hidden lg:block">
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=400&width=400&text=Gallery+7"
+                    src="/godna.png"
                     alt={`${selectedState.name} food`}
                     width={400}
                     height={400}
@@ -942,7 +834,7 @@ export default function Home() {
                 </div>
                 <div className="overflow-hidden rounded-lg">
                   <Image
-                    src="/placeholder.svg?height=600&width=400&text=Gallery+8"
+                    src="/vishnumandir.jpg"
                     alt={`${selectedState.name} festival`}
                     width={400}
                     height={600}
@@ -1087,8 +979,8 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground text-sm">
-                    Events & Festivals
+                  <Link href="/team" className="text-muted-foreground hover:text-foreground text-sm">
+                    Our Team
                   </Link>
                 </li>
               </ul>

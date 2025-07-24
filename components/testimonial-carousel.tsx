@@ -28,9 +28,9 @@ export default function TestimonialCarousel() {
     chhattisgarh: [
       {
         id: "1",
-        name: "Priya Sharma",
+        name: "Shivam singh",
         location: "Mumbai, Maharashtra",
-        avatar: "/placeholder.svg?height=80&width=80&text=PS",
+        avatar: "/shivam.png",
         rating: 5,
         comment: "Chitrakote Falls was absolutely breathtaking! The tribal experience felt so authentic and welcoming.",
         experience: "Chitrakote Falls & Tribal Village Tour",

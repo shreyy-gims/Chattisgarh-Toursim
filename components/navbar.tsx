@@ -28,7 +28,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/placeholder.svg?height=32&width=32&text=Logo"
+              src="/log.jpg"
               alt={`${selectedState.name} Tourism Logo`}
               width={32}
               height={32}

@@ -130,7 +130,7 @@ const states: StateInfo[] = [
     name: "Maharashtra",
     displayName: "Maharashtra Tourism",
     description: "Unlimited Maharashtra",
-    image: "/placeholder.svg?height=1080&width=1920&text=Maharashtra+Caves",
+    image: "/maharashtrahero.jpg",
     destinations: {
       waterfalls: 25,
       nationalParks: 18,
@@ -145,7 +145,7 @@ const states: StateInfo[] = [
     name: "Madhya Pradesh",
     displayName: "Madhya Pradesh Tourism",
     description: "Heart of Incredible India",
-    image: "/placeholder.svg?height=1080&width=1920&text=Madhya+Pradesh+Temples",
+    image: "/madhyapradeshhero.jpg",
     destinations: {
       waterfalls: 15,
       nationalParks: 22,
@@ -160,7 +160,7 @@ const states: StateInfo[] = [
     name: "Odisha",
     displayName: "Odisha Tourism",
     description: "Soul of Incredible India",
-    image: "/placeholder.svg?height=1080&width=1920&text=Odisha+Temples",
+    image: "/orrisahero.png",
     destinations: {
       waterfalls: 12,
       nationalParks: 8,
@@ -175,7 +175,7 @@ const states: StateInfo[] = [
     name: "Jharkhand",
     displayName: "Jharkhand Tourism",
     description: "Land of Forests and Waterfalls",
-    image: "/placeholder.svg?height=1080&width=1920&text=Jharkhand+Waterfalls",
+    image: "/jharkhandhero.png",
     destinations: {
       waterfalls: 20,
       nationalParks: 12,
@@ -190,7 +190,7 @@ const states: StateInfo[] = [
     name: "Andhra Pradesh",
     displayName: "Andhra Pradesh Tourism",
     description: "Kohinoor of India",
-    image: "/placeholder.svg?height=1080&width=1920&text=Andhra+Pradesh+Temple",
+    image: "/andrapradesh.png",
     destinations: {
       waterfalls: 16,
       nationalParks: 10,

@@ -60,6 +60,11 @@ export default function Footer() {
                   Culture
                 </Link>
               </li>
+              <li>
+                <Link href="/team" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Our Team
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -95,19 +100,19 @@ export default function Footer() {
             <h3 className="font-semibold">Contact Info</h3>
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-muted-foreground" />
+                <Phone className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <span className="text-muted-foreground">+91 1800-111-363</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-muted-foreground" />
-                <span className="text-muted-foreground">info@incredibleindia.org</span>
+                <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground break-all">info@incredibleindia.org</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
+              <div className="flex items-start space-x-2">
+                <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
                 <span className="text-muted-foreground">Ministry of Tourism, New Delhi</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Globe className="h-4 w-4 text-muted-foreground" />
+                <Globe className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <span className="text-muted-foreground">incredibleindia.org</span>
               </div>
             </div>
@@ -147,7 +152,7 @@ export default function Footer() {
         <div className="border-t pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-sm text-center sm:text-left">
                 © 2024 Ministry of Tourism, Government of India. All rights reserved.
               </p>
               <div className="flex items-center space-x-2 text-xs text-muted-foreground">
@@ -157,7 +162,7 @@ export default function Footer() {
                 <span>Atithi Devo Bhava</span>
               </div>
             </div>
-            <div className="flex flex-wrap justify-center sm:justify-end space-x-4">
+            <div className="flex flex-wrap justify-center sm:justify-end gap-4">
               <Link href="/privacy" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
                 Privacy Policy
               </Link>

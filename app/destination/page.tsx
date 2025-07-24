@@ -29,7 +29,7 @@ const stateDestinations = {
       title: "Tirathgarh Falls",
       description:
         "A spectacular multi-tiered waterfall cascading down from a height of 300 feet, surrounded by lush green forests.",
-      image: "/placeholder.svg?height=400&width=600&text=Tirathgarh+Falls",
+      image: "/tirathgarh169.png",
       category: "waterfall",
       location: "Bastar",
       rating: 4.6,
@@ -40,7 +40,7 @@ const stateDestinations = {
       title: "Kanger Valley National Park",
       description:
         "Home to diverse wildlife, stunning caves, and pristine waterfalls. A paradise for nature lovers and adventure enthusiasts.",
-      image: "/placeholder.svg?height=400&width=600&text=Kanger+Valley",
+      image: "/national-parks-india-1.jpg",
       category: "national-park",
       location: "Bastar",
       rating: 4.9,
@@ -48,10 +48,10 @@ const stateDestinations = {
     },
     {
       id: 4,
-      title: "Barnawapara Wildlife Sanctuary",
+      title: "Jatmai Ghatarani Falls",
       description:
         "Discover diverse wildlife including leopards, bears, and hundreds of bird species in their natural habitat.",
-      image: "/placeholder.svg?height=400&width=600&text=Barnawapara+Wildlife",
+      image: "/ghatarani.png",
       category: "national-park",
       location: "Raipur",
       rating: 4.5,
@@ -62,7 +62,7 @@ const stateDestinations = {
       title: "Bhoramdeo Temple",
       description:
         "11th century temple known as the 'Khajuraho of Chhattisgarh' featuring intricate stone carvings and architectural marvels.",
-      image: "/placeholder.svg?height=400&width=600&text=Bhoramdeo+Temple",
+      image: "/bhoramdev.jpg",
       category: "temple",
       location: "Kawardha",
       rating: 4.7,
@@ -70,9 +70,9 @@ const stateDestinations = {
     },
     {
       id: 6,
-      title: "Sirpur Archaeological Site",
+      title: "Barnawapara Wildlife Sanctuary Tour",
       description: "Ancient Buddhist and Hindu archaeological site with temples dating back to the 5th-8th century.",
-      image: "/placeholder.svg?height=400&width=600&text=Sirpur+Archaeological",
+      image: "/sher3.jpg",
       category: "temple",
       location: "Mahasamund",
       rating: 4.6,
@@ -80,10 +80,10 @@ const stateDestinations = {
     },
     {
       id: 7,
-      title: "MM Fun City Water Park",
+      title: "Onakona Temple",
       description:
         "Raipur's premier water park featuring thrilling water slides, wave pools, and family-friendly attractions.",
-      image: "/placeholder.svg?height=400&width=600&text=MM+Fun+City",
+      image: "/Onakona Temple.jpg",
       category: "waterpark",
       location: "Raipur",
       rating: 4.3,
@@ -94,7 +94,7 @@ const stateDestinations = {
       title: "Bastar Heritage Package",
       description:
         "7-day comprehensive tour covering tribal villages, waterfalls, and cultural experiences in the heart of Bastar.",
-      image: "/placeholder.svg?height=400&width=600&text=Bastar+Heritage",
+      image: "/dushera.png",
       category: "packages",
       location: "Bastar Region",
       rating: 4.8,

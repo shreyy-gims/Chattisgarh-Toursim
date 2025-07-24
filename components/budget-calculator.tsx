@@ -1,346 +1,406 @@
 "use client"
 
 import { useState } from "react"
-import { Calculator, Users, Calendar, IndianRupee, Hotel, Car, UtensilsCrossed, MapPin } from "lucide-react"
+import { Calculator, Users, Calendar, MapPin, TrendingUp, Info } from "lucide-react"
+import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
+import { Separator } from "@/components/ui/separator"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useStateContext } from "@/contexts/state-context"
 
 export default function BudgetCalculator() {
-  const [people, setPeople] = useState(2)
-  const [days, setDays] = useState(3)
-  const [hotelCategory, setHotelCategory] = useState("3-star")
-  const [transportMode, setTransportMode] = useState("car")
-  const [foodPreference, setFoodPreference] = useState("local")
+  const { selectedState } = useStateContext()
+  const [formData, setFormData] = useState({
+    travelers: "",
+    days: "",
+    accommodation: "",
+    transport: "",
+  })
+  const [budget, setBudget] = useState<{
+    accommodation: number
+    transport: number
+    food: number
+    activities: number
+    total: number
+  } | null>(null)
+  const [showAnalysis, setShowAnalysis] = useState(false)
 
-  // Budget calculation logic
   const calculateBudget = () => {
-    let hotelCost = 0
-    let transportCost = 0
-    let foodCost = 0
-    let activityCost = 0
+    const travelers = Number.parseInt(formData.travelers) || 1
+    const days = Number.parseInt(formData.days) || 1
 
-    // Hotel costs per night per room
-    switch (hotelCategory) {
-      case "budget":
-        hotelCost = 1500
-        break
-      case "3-star":
-        hotelCost = 3500
-        break
-      case "4-star":
-        hotelCost = 6000
-        break
-      case "luxury":
-        hotelCost = 12000
-        break
+    // Enhanced state-specific rates with detailed breakdown
+    const stateRates = {
+      chhattisgarh: {
+        budget: 1500,
+        mid: 2500,
+        luxury: 4500,
+        description: "Affordable destination with rich tribal culture",
+      },
+      rajasthan: {
+        budget: 2000,
+        mid: 3500,
+        luxury: 6000,
+        description: "Royal heritage with premium palace hotels",
+      },
+      kerala: {
+        budget: 1800,
+        mid: 3000,
+        luxury: 5500,
+        description: "Backwater paradise with luxury houseboats",
+      },
+      himachal: {
+        budget: 1600,
+        mid: 2800,
+        luxury: 5000,
+        description: "Mountain retreat with scenic beauty",
+      },
+      goa: {
+        budget: 2200,
+        mid: 3800,
+        luxury: 6500,
+        description: "Beach destination with vibrant nightlife",
+      },
+      "tamil-nadu": {
+        budget: 1700,
+        mid: 2800,
+        luxury: 4800,
+        description: "Temple architecture and cultural heritage",
+      },
+      karnataka: {
+        budget: 1600,
+        mid: 2700,
+        luxury: 4700,
+        description: "Tech hub with historical monuments",
+      },
+      maharashtra: {
+        budget: 1900,
+        mid: 3200,
+        luxury: 5500,
+        description: "Bollywood glamour and hill stations",
+      },
+      "madhya-pradesh": {
+        budget: 1400,
+        mid: 2300,
+        luxury: 4200,
+        description: "Heart of India with tiger reserves",
+      },
+      odisha: {
+        budget: 1300,
+        mid: 2200,
+        luxury: 4000,
+        description: "Ancient temples and pristine beaches",
+      },
+      jharkhand: {
+        budget: 1200,
+        mid: 2000,
+        luxury: 3800,
+        description: "Tribal heritage and natural waterfalls",
+      },
+      "andhra-pradesh": {
+        budget: 1500,
+        mid: 2600,
+        luxury: 4600,
+        description: "Spiritual destination with coastal beauty",
+      },
     }
 
-    // Transport costs per day
-    switch (transportMode) {
-      case "bus":
-        transportCost = 500
-        break
-      case "car":
-        transportCost = 2000
-        break
-      case "suv":
-        transportCost = 3000
-        break
-      case "tempo":
-        transportCost = 4000
-        break
-    }
+    const rates = stateRates[selectedState.id as keyof typeof stateRates] || stateRates.chhattisgarh
+    const accommodationRate = rates[formData.accommodation as keyof typeof rates] || rates.mid
 
-    // Food costs per person per day
-    switch (foodPreference) {
-      case "budget":
-        foodCost = 300
-        break
-      case "local":
-        foodCost = 600
-        break
-      case "restaurant":
-        foodCost = 1200
-        break
-      case "premium":
-        foodCost = 2000
-        break
-    }
+    const accommodation = Math.round(accommodationRate * 0.4 * travelers * days)
+    const transport = Math.round(accommodationRate * 0.25 * travelers)
+    const food = Math.round(accommodationRate * 0.25 * travelers * days)
+    const activities = Math.round(accommodationRate * 0.1 * travelers * days)
+    const total = accommodation + transport + food + activities
 
-    // Activity costs per person per day
-    activityCost = 800
-
-    const totalHotelCost = hotelCost * days
-    const totalTransportCost = transportCost * days
-    const totalFoodCost = foodCost * people * days
-    const totalActivityCost = activityCost * people * days
-
-    const grandTotal = totalHotelCost + totalTransportCost + totalFoodCost + totalActivityCost
-
-    return {
-      hotel: totalHotelCost,
-      transport: totalTransportCost,
-      food: totalFoodCost,
-      activities: totalActivityCost,
-      total: grandTotal,
-      perPerson: Math.round(grandTotal / people),
-    }
+    setBudget({ accommodation, transport, food, activities, total })
+    setShowAnalysis(true)
   }
 
-  const budget = calculateBudget()
+  const getPercentage = (amount: number) => (budget ? (amount / budget.total) * 100 : 0)
+
+  const getBudgetCategory = () => {
+    if (!budget) return ""
+    if (budget.total < 15000) return "Budget-Friendly"
+    if (budget.total < 35000) return "Mid-Range"
+    if (budget.total < 60000) return "Premium"
+    return "Luxury"
+  }
 
   return (
-    <Card className="w-full shadow-lg">
-      <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50 p-4 sm:p-6">
-        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-          <Calculator className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-          Trip Budget Calculator
-        </CardTitle>
-        <p className="text-xs sm:text-sm text-muted-foreground">
-          Get instant cost estimates for your Chhattisgarh trip
-        </p>
-      </CardHeader>
-      <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6">
-        {/* Trip Details Section */}
-        <div className="space-y-3 sm:space-y-4">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-800 border-b pb-2">Trip Details</h3>
-
-          {/* Number of People */}
-          <div className="space-y-2 sm:space-y-3">
-            <Label className="flex items-center gap-2 text-sm font-medium">
-              <Users className="h-4 w-4 text-blue-600" />
-              Travelers:{" "}
-              <span className="font-bold text-blue-600">
-                {people} {people === 1 ? "person" : "people"}
-              </span>
-            </Label>
-            <Slider
-              value={[people]}
-              onValueChange={(value) => setPeople(value[0])}
-              max={10}
-              min={1}
-              step={1}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>1 person</span>
-              <span>10 people</span>
-            </div>
+    <div className="w-full max-w-2xl mx-auto space-y-6">
+      {/* Header */}
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-2">
+        <div className="flex items-center justify-center gap-2">
+          <div className="p-2 bg-primary/10 rounded-full">
+            <Calculator className="h-6 w-6 text-primary" />
           </div>
-
-          {/* Number of Days */}
-          <div className="space-y-2 sm:space-y-3">
-            <Label className="flex items-center gap-2 text-sm font-medium">
-              <Calendar className="h-4 w-4 text-green-600" />
-              Duration:{" "}
-              <span className="font-bold text-green-600">
-                {days} {days === 1 ? "day" : "days"}
-              </span>
-            </Label>
-            <Slider
-              value={[days]}
-              onValueChange={(value) => setDays(value[0])}
-              max={15}
-              min={1}
-              step={1}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>1 day</span>
-              <span>15 days</span>
-            </div>
-          </div>
+          <h3 className="text-2xl font-bold">Smart Budget Planner</h3>
         </div>
+        <p className="text-muted-foreground">
+          Get personalized budget estimates for your {selectedState.name} adventure
+        </p>
+      </motion.div>
 
-        {/* Preferences Section */}
-        <div className="space-y-3 sm:space-y-4">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-800 border-b pb-2">Travel Preferences</h3>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <MapPin className="h-5 w-5" />
+            Plan Your {selectedState.name} Trip
+          </CardTitle>
+          <p className="text-sm text-muted-foreground">Configure your trip details for accurate budget calculation</p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-2 gap-4">
+            <motion.div
+              className="space-y-2"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Label htmlFor="travelers" className="text-sm font-medium">
+                Number of Travelers
+              </Label>
+              <div className="relative">
+                <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="travelers"
+                  type="number"
+                  placeholder="2"
+                  className="pl-9"
+                  value={formData.travelers}
+                  onChange={(e) => setFormData({ ...formData, travelers: e.target.value })}
+                />
+              </div>
+              {formData.travelers && (
+                <Badge variant="secondary" className="text-xs">
+                  {Number.parseInt(formData.travelers) === 1
+                    ? "Solo Trip"
+                    : Number.parseInt(formData.travelers) <= 4
+                      ? "Small Group"
+                      : "Large Group"}
+                </Badge>
+              )}
+            </motion.div>
 
-          {/* Hotel Category */}
-          <div className="space-y-2">
-            <Label className="flex items-center gap-2 text-sm font-medium">
-              <Hotel className="h-4 w-4 text-purple-600" />
-              Accommodation Type
-            </Label>
-            <Select value={hotelCategory} onValueChange={setHotelCategory}>
-              <SelectTrigger className="h-10 sm:h-11">
-                <SelectValue />
+            <motion.div
+              className="space-y-2"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Label htmlFor="days" className="text-sm font-medium">
+                Trip Duration (Days)
+              </Label>
+              <div className="relative">
+                <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="days"
+                  type="number"
+                  placeholder="5"
+                  className="pl-9"
+                  value={formData.days}
+                  onChange={(e) => setFormData({ ...formData, days: e.target.value })}
+                />
+              </div>
+              {formData.days && (
+                <Badge variant="secondary" className="text-xs">
+                  {Number.parseInt(formData.days) <= 3
+                    ? "Weekend Trip"
+                    : Number.parseInt(formData.days) <= 7
+                      ? "Week-long"
+                      : "Extended Stay"}
+                </Badge>
+              )}
+            </motion.div>
+          </div>
+
+          <motion.div
+            className="space-y-2"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Label className="text-sm font-medium">Accommodation Preference</Label>
+            <Select
+              value={formData.accommodation}
+              onValueChange={(value) => setFormData({ ...formData, accommodation: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select accommodation type" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="budget">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Budget Hotels</span>
-                    <span className="text-xs text-muted-foreground">₹1,500 per night</span>
+                  <div className="space-y-1">
+                    <div className="font-medium">Budget Hotels & Hostels</div>
+                    <div className="text-xs text-muted-foreground">Basic amenities, clean & safe</div>
                   </div>
                 </SelectItem>
-                <SelectItem value="3-star">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">3-Star Hotels</span>
-                    <span className="text-xs text-muted-foreground">₹3,500 per night</span>
-                  </div>
-                </SelectItem>
-                <SelectItem value="4-star">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">4-Star Hotels</span>
-                    <span className="text-xs text-muted-foreground">₹6,000 per night</span>
+                <SelectItem value="mid">
+                  <div className="space-y-1">
+                    <div className="font-medium">3-4 Star Hotels</div>
+                    <div className="text-xs text-muted-foreground">Comfortable with good amenities</div>
                   </div>
                 </SelectItem>
                 <SelectItem value="luxury">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Luxury Hotels</span>
-                    <span className="text-xs text-muted-foreground">₹12,000 per night</span>
+                  <div className="space-y-1">
+                    <div className="font-medium">Luxury Hotels & Resorts</div>
+                    <div className="text-xs text-muted-foreground">Premium experience with all facilities</div>
                   </div>
                 </SelectItem>
               </SelectContent>
             </Select>
-          </div>
+          </motion.div>
 
-          {/* Transport Mode */}
-          <div className="space-y-2">
-            <Label className="flex items-center gap-2 text-sm font-medium">
-              <Car className="h-4 w-4 text-orange-600" />
-              Transportation
-            </Label>
-            <Select value={transportMode} onValueChange={setTransportMode}>
-              <SelectTrigger className="h-10 sm:h-11">
-                <SelectValue />
+          <motion.div
+            className="space-y-2"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Label className="text-sm font-medium">Transportation Mode</Label>
+            <Select
+              value={formData.transport}
+              onValueChange={(value) => setFormData({ ...formData, transport: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select transportation" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="bus">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Bus/Public Transport</span>
-                    <span className="text-xs text-muted-foreground">₹500 per day</span>
+                <SelectItem value="public">
+                  <div className="space-y-1">
+                    <div className="font-medium">Public Transport</div>
+                    <div className="text-xs text-muted-foreground">Buses, trains - Most economical</div>
                   </div>
                 </SelectItem>
-                <SelectItem value="car">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Private Car</span>
-                    <span className="text-xs text-muted-foreground">₹2,000 per day</span>
+                <SelectItem value="private">
+                  <div className="space-y-1">
+                    <div className="font-medium">Private Car/Taxi</div>
+                    <div className="text-xs text-muted-foreground">Comfortable & flexible</div>
                   </div>
                 </SelectItem>
-                <SelectItem value="suv">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">SUV</span>
-                    <span className="text-xs text-muted-foreground">₹3,000 per day</span>
-                  </div>
-                </SelectItem>
-                <SelectItem value="tempo">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Tempo Traveller</span>
-                    <span className="text-xs text-muted-foreground">₹4,000 per day</span>
+                <SelectItem value="flight">
+                  <div className="space-y-1">
+                    <div className="font-medium">Flight + Local Transport</div>
+                    <div className="text-xs text-muted-foreground">Fastest option for distant locations</div>
                   </div>
                 </SelectItem>
               </SelectContent>
             </Select>
-          </div>
+          </motion.div>
 
-          {/* Food Preference */}
-          <div className="space-y-2">
-            <Label className="flex items-center gap-2 text-sm font-medium">
-              <UtensilsCrossed className="h-4 w-4 text-red-600" />
-              Dining Preference
-            </Label>
-            <Select value={foodPreference} onValueChange={setFoodPreference}>
-              <SelectTrigger className="h-10 sm:h-11">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="budget">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Street Food & Local</span>
-                    <span className="text-xs text-muted-foreground">₹300 per person/day</span>
-                  </div>
-                </SelectItem>
-                <SelectItem value="local">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Local Restaurants</span>
-                    <span className="text-xs text-muted-foreground">₹600 per person/day</span>
-                  </div>
-                </SelectItem>
-                <SelectItem value="restaurant">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Good Restaurants</span>
-                    <span className="text-xs text-muted-foreground">₹1,200 per person/day</span>
-                  </div>
-                </SelectItem>
-                <SelectItem value="premium">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">Premium Dining</span>
-                    <span className="text-xs text-muted-foreground">₹2,000 per person/day</span>
-                  </div>
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+          <Button
+            onClick={calculateBudget}
+            className="w-full"
+            size="lg"
+            disabled={!formData.travelers || !formData.days || !formData.accommodation}
+          >
+            <Calculator className="h-4 w-4 mr-2" />
+            Calculate My Trip Budget
+          </Button>
 
-        {/* Budget Breakdown */}
-        <div className="bg-gradient-to-r from-blue-50 to-green-50 p-4 sm:p-5 rounded-xl border">
-          <h4 className="font-semibold flex items-center gap-2 mb-3 sm:mb-4 text-gray-800 text-sm sm:text-base">
-            <IndianRupee className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
-            Budget Breakdown
-          </h4>
-          <div className="space-y-2 sm:space-y-3">
-            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
-              <div className="flex items-center gap-2">
-                <Hotel className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
-                <span className="text-xs sm:text-sm font-medium">Accommodation</span>
-                <span className="text-xs text-muted-foreground">({days} nights)</span>
+          {budget && showAnalysis && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-6 pt-6 border-t"
+            >
+              {/* Quick Overview */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-4 bg-primary/5 rounded-lg">
+                  <div className="text-2xl font-bold text-primary">₹{budget.total.toLocaleString()}</div>
+                  <div className="text-sm text-muted-foreground">Total Budget</div>
+                  <Badge className="mt-1">{getBudgetCategory()}</Badge>
+                </div>
+                <div className="text-center p-4 bg-secondary/20 rounded-lg">
+                  <div className="text-2xl font-bold">
+                    ₹{Math.round(budget.total / Number.parseInt(formData.travelers)).toLocaleString()}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Per Person</div>
+                </div>
               </div>
-              <span className="font-semibold text-xs sm:text-sm">₹{budget.hotel.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
-              <div className="flex items-center gap-2">
-                <Car className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
-                <span className="text-xs sm:text-sm font-medium">Transportation</span>
-                <span className="text-xs text-muted-foreground">({days} days)</span>
-              </div>
-              <span className="font-semibold text-xs sm:text-sm">₹{budget.transport.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
-              <div className="flex items-center gap-2">
-                <UtensilsCrossed className="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
-                <span className="text-xs sm:text-sm font-medium">Food & Dining</span>
-                <span className="text-xs text-muted-foreground">
-                  ({people} × {days} days)
-                </span>
-              </div>
-              <span className="font-semibold text-xs sm:text-sm">₹{budget.food.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-gray-200">
-              <div className="flex items-center gap-2">
-                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
-                <span className="text-xs sm:text-sm font-medium">Activities & Sightseeing</span>
-                <span className="text-xs text-muted-foreground">
-                  ({people} × {days} days)
-                </span>
-              </div>
-              <span className="font-semibold text-xs sm:text-sm">₹{budget.activities.toLocaleString()}</span>
-            </div>
 
-            {/* Total Section */}
-            <div className="bg-white p-3 sm:p-4 rounded-lg mt-3 sm:mt-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-base sm:text-lg font-bold text-gray-800">Total Budget</span>
-                <span className="text-xl sm:text-2xl font-bold text-green-600">₹{budget.total.toLocaleString()}</span>
+              {/* Detailed Breakdown */}
+              <div className="space-y-4">
+                <h4 className="font-semibold flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4" />
+                  Budget Breakdown for {selectedState.name}
+                </h4>
+
+                <div className="space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Accommodation ({formData.days} nights)</span>
+                      <span className="font-medium">₹{budget.accommodation.toLocaleString()}</span>
+                    </div>
+                    <Progress value={getPercentage(budget.accommodation)} className="h-2" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Transportation</span>
+                      <span className="font-medium">₹{budget.transport.toLocaleString()}</span>
+                    </div>
+                    <Progress value={getPercentage(budget.transport)} className="h-2" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Food & Dining</span>
+                      <span className="font-medium">₹{budget.food.toLocaleString()}</span>
+                    </div>
+                    <Progress value={getPercentage(budget.food)} className="h-2" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Activities & Sightseeing</span>
+                      <span className="font-medium">₹{budget.activities.toLocaleString()}</span>
+                    </div>
+                    <Progress value={getPercentage(budget.activities)} className="h-2" />
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="flex justify-between font-semibold text-lg">
+                  <span>Total Estimated Budget:</span>
+                  <span className="text-primary">₹{budget.total.toLocaleString()}</span>
+                </div>
               </div>
-              <div className="flex justify-between items-center text-xs sm:text-sm">
-                <span className="text-muted-foreground">Cost per person</span>
-                <span className="font-semibold text-blue-600">₹{budget.perPerson.toLocaleString()}</span>
+
+              {/* Smart Insights */}
+              <Alert>
+                <Info className="h-4 w-4" />
+                <AlertDescription>
+                  <strong>Budget Tip:</strong> This estimate includes a 10% buffer for unexpected expenses. Book
+                  accommodations 2-3 weeks in advance for better rates in {selectedState.name}.
+                </AlertDescription>
+              </Alert>
+
+              {budget.total > 40000 && (
+                <Alert>
+                  <TrendingUp className="h-4 w-4" />
+                  <AlertDescription>
+                    <strong>Cost Optimization:</strong> Consider traveling during off-season or choosing mid-range
+                    accommodations to reduce costs by 20-30%.
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              <div className="text-xs text-muted-foreground space-y-1">
+                <p>* Prices are estimated and may vary based on season, availability, and specific locations.</p>
+                <p>* {selectedState.name} offers great value with its diverse attractions and cultural experiences.</p>
               </div>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-      <CardFooter className="bg-gray-50 p-4 sm:p-6">
-        <Button className="w-full h-10 sm:h-12 text-sm sm:text-lg font-semibold bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700">
-          Plan Trip with This Budget
-        </Button>
-      </CardFooter>
-    </Card>
+            </motion.div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   )
 }

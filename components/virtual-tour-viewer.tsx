@@ -21,6 +21,7 @@ interface VirtualTour {
 
 export default function VirtualTourViewer() {
   const { selectedState } = useStateContext()
+  const [showIframe, setShowIframe] = useState(false)
   const [selectedTour, setSelectedTour] = useState<VirtualTour | null>(null)
 
   // Virtual tours data based on selected state
@@ -31,28 +32,30 @@ export default function VirtualTourViewer() {
           id: "chitrakote-falls",
           title: "Chitrakote Falls Virtual Tour",
           location: "Bastar, Chhattisgarh",
-          thumbnail: "/placeholder.svg?height=300&width=400&text=Chitrakote+Falls",
+          thumbnail: "/chitrakote.jpg",
           description: "Experience the thundering beauty of India's widest waterfall",
           category: "Nature",
-          embedUrl: "<iframe src="//www.google.com/maps/embed?pb=!4v1753033110384!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRGFvdDdfdmdF!2m2!1d19.20727753132451!2d81.69718947534021!3f122.36418661197456!4f-28.806763391154156!5f0.7820865974627469"></iframe>",
+          embedUrl: "https://www.google.com/maps/embed?pb=!4v1753255171269!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRGFvdDdfdmdF!2m2!1d19.20727753132451!2d81.69718947534021!3f211.13919667698613!4f-19.306703123420192!5f0.7820865974627469",
+
+
         },
         {
-          id: "sirpur-heritage",
-          title: "Ancient Sirpur Archaeological Site",
-          location: "Mahasamund, Chhattisgarh",
-          thumbnail: "/placeholder.svg?height=300&width=400&text=Sirpur+Heritage",
+          id: "onakona-balod",
+          title: "Onakona Temple",
+          location: "Balod, Chhattisgarh",
+          thumbnail: "/Onakona Temple.jpg",
           description: "Explore 1500-year-old Buddhist and Hindu temples",
           category: "Heritage",
-          embedUrl: "https://maps.google.com/embed/sirpur-heritage",
+          embedUrl: "https://www.google.com/maps/embed?pb=!4v1753258811044!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJRGUtTGVMWXc.!2m2!1d20.5743712243563!2d81.44481450987458!3f166.1700029527709!4f-4.9055702743543605!5f0.7820865974627469",
         },
         {
           id: "tribal-museum",
-          title: "Tribal Museum Cultural Journey",
-          location: "Raipur, Chhattisgarh",
-          thumbnail: "/placeholder.svg?height=300&width=400&text=Tribal+Museum",
+          title: "Ranidhara Falls",
+          location: "Kawardha, Chhattisgarh",
+          thumbnail: "/tigerpoint (2).jpg",
           description: "Discover rich tribal culture and traditional arts",
           category: "Culture",
-          embedUrl: "https://maps.google.com/embed/tribal-museum",
+          embedUrl: "https://www.google.com/maps/embed?pb=!4v1753259046130!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJRGV6TnZRR2c.!2m2!1d22.19848126235689!2d81.09449743188642!3f354.3002271206295!4f15.279625450876651!5f0.7820865974627469",
         },
       ],
       rajasthan: [
@@ -376,24 +379,21 @@ export default function VirtualTourViewer() {
       ],
     }
     return toursByState[stateId as keyof typeof toursByState] || toursByState.chhattisgarh
+    
   }
 
   const tours = getToursForState(selectedState.id)
 
-  useEffect(() => {
+     useEffect(() => {
     if (tours.length > 0 && !selectedTour) {
       setSelectedTour(tours[0])
+      setShowIframe(false) // reset iframe when state changes
     }
   }, [tours, selectedTour])
 
-  const handleTourSelect = (tour: VirtualTour) => {
+  const handleTourSelect = (tour) => {
     setSelectedTour(tour)
-  }
-
-  const openVirtualTour = () => {
-    if (selectedTour?.embedUrl) {
-      window.open(selectedTour.embedUrl, "_blank")
-    }
+    setShowIframe(false)
   }
 
   if (!selectedTour) return null
@@ -402,17 +402,43 @@ export default function VirtualTourViewer() {
     <div className="space-y-4 sm:space-y-6">
       {/* Main Tour Display */}
       <Card className="overflow-hidden">
-        <div className="relative aspect-video bg-black">
-          <Image
-            src={selectedTour.thumbnail || "/placeholder.svg"}
-            alt={selectedTour.title}
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/20" />
+        <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
+          {showIframe && selectedTour.embedUrl ? (
+            <iframe
+              src={selectedTour.embedUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 w-full h-full"
+            />
+          ) : (
+            <>
+              <Image
+                src={selectedTour.thumbnail || "/placeholder.svg"}
+                alt={selectedTour.title}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/20" />
 
-          {/* Tour Info Overlay */}
-          <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex justify-between items-start">
+              {/* Eye Button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Button
+                  size="lg"
+                  className="rounded-full w-16 h-16 sm:w-20 sm:h-20 z-10"
+                  onClick={() => setShowIframe(true)}
+                >
+                  <Eye className="h-6 w-6 sm:h-8 sm:w-8" />
+                </Button>
+              </div>
+            </>
+          )}
+
+          {/* Tour Info */}
+          <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex justify-between items-start z-10">
             <div>
               <Badge className="mb-2 text-xs">{selectedTour.category}</Badge>
               <h3 className="text-white font-semibold text-sm sm:text-lg">{selectedTour.title}</h3>
@@ -422,22 +448,8 @@ export default function VirtualTourViewer() {
               </p>
             </div>
           </div>
-
-          {/* Virtual Tour Button */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Button size="lg" className="rounded-full w-16 h-16 sm:w-20 sm:h-20" onClick={openVirtualTour}>
-              <Eye className="h-6 w-6 sm:h-8 sm:w-8" />
-            </Button>
-          </div>
-
-          {/* External Link Button */}
-          <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-            <Button size="sm" variant="secondary" className="rounded-full" onClick={openVirtualTour}>
-              <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-              <span className="hidden sm:inline">Open Tour</span>
-            </Button>
-          </div>
         </div>
+
         <CardContent className="p-3 sm:p-4">
           <p className="text-muted-foreground text-sm leading-relaxed">{selectedTour.description}</p>
           <div className="mt-3 flex items-center justify-between">
@@ -490,7 +502,7 @@ export default function VirtualTourViewer() {
         <CardContent className="p-4 text-center">
           <h4 className="font-medium mb-2">How to Experience Virtual Tours</h4>
           <p className="text-sm text-muted-foreground">
-            Select a destination above and click the eye icon or "Open Tour" button to launch the immersive 360° virtual
+            Select a destination above and click the eye icon to launch the immersive 360° virtual
             experience. You can navigate using your mouse or touch gestures on mobile devices.
           </p>
         </CardContent>
